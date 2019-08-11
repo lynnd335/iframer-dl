@@ -23,24 +23,11 @@
 </html>
    <script>
    $(function() {
-    
-    function isURL(str){
-      return str.includes("." || "http");
-    }
-    
       $("#urlMain").keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
-
-        var input = $(this).val();
-        if (isURL(input)){
-
-        $("#frameParent").html("<iframe is='x-frame-bypass' src='" + (input.split("//")[0] == "https://" ? "" : "https://") + "' width='100%' height='2500'></iframe>");
-      }else{
-        $("#frameParent").html("<iframe is='x-frame-bypass' src='https://www.google.com/search?&q=" + input +  "' width='100%' height='2500'></iframe>");
-      }
+        $("#frameParent").html("<iframe is='x-frame-bypass' src='" + ($(this).val().split("//")[0] == "https://" ? "" : "https://") + "' width='100%' height='2500'></iframe>");
     }
-       
   })
     });
 
