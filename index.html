@@ -8,12 +8,6 @@
   crossorigin="anonymous"></script>
   
   </head>
- <style>
-  #urlMain{
-   background-color: #121212;
-   color: #fff;
-  }
- </style>
   <body>
   <div class="row">
     <div class="col-md-12">
@@ -29,11 +23,26 @@
 </html>
    <script>
    $(function() {
+    
+    function isURL(str){
+      return str.includes("." || "http");
+    }
+    
       $("#urlMain").keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
-        $("#frameParent").html("<iframe is='x-frame-bypass' src='" + ($(this).val().split("//")[0] == "https://" ? "" : "https://") + "' width='100%' height='2500'></iframe>");
+
+        var input = $(this).val();
+        if (isURL(input)){
+
+        $("#frameParent").html("<iframe is='x-frame-bypass' src='" + (input.split("//")[0] == "https://" ? "" : "https://") + "' width='100%' height='2500'></iframe>");
+      }else{
+        $("#frameParent").html("<iframe is='x-frame-bypass' src='http://www.google.com/custom?q=" + input +  "&btnG=Search' width='100%' height='2500'></iframe>");
+      }
     }
+    
+
+   //http://www.google.com/custom?q=test&beesbtnG=Search   
   })
     });
 
